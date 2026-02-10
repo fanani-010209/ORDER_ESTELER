@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Pesanan</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<h2>📋 Data Pesanan Es Teler</h2>
+
+<table border="1" align="center" cellpadding="10">
+<tr>
+    <th>Nama</th>
+    <th>Alamat</th>
+    <th>WA</th>
+    <th>Produk</th>
+    <th>Harga</th>
+    <th>Waktu</th>
+</tr>
+<tbody id="data"></tbody>
+</table>
+
+<script>
+let data = JSON.parse(localStorage.getItem("pesanan")) || [];
+let tbody = document.getElementById("data");
+
+data.forEach(p => {
+    tbody.innerHTML += `
+    <tr>
+        <td>${p.nama}</td>
+        <td>${p.alamat}</td>
+        <td>${p.wa}</td>
+        <td>${p.produk}</td>
+        <td>Rp${p.harga}</td>
+        <td>${p.waktu}</td>
+    </tr>`;
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,27 @@
+body {
+    text-align: center;
+    font-family: Arial;
+    background: #fff6e5;
+}
+
+img {
+    border-radius: 15px;
+}
+
+button {
+    background: orange;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+input {
+    display: block;
+    margin: 8px auto;
+    padding: 7px;
+}
+
+.hidden {
+    display: none;
+}
