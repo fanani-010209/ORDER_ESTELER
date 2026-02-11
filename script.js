@@ -1,5 +1,11 @@
 let latitude = null;
 let longitude = null;
+let sudahInvoice = false; // untuk cek klik pertama atau kedua
+let totalGlobal = 0;
+let mapsURLGlobal = "";
+let namaGlobal = "";
+let produkGlobal = "";
+let jumlahGlobal = 0;
 
 function beli() {
     if (!document.getElementById("produk").value) {
@@ -9,32 +15,22 @@ function beli() {
     document.getElementById("form-pesan").classList.remove("hidden");
 }
 
-// Ambil lokasi GPS asli
 function ambilLokasi() {
-    if (!navigator.geolocation) {
-        alert("Browser tidak mendukung GPS");
-        return;
-    }
-
     navigator.geolocation.getCurrentPosition(
         posisi => {
             latitude = posisi.coords.latitude;
             longitude = posisi.coords.longitude;
-
             document.getElementById("lokasi").value =
                 latitude.toFixed(6) + ", " + longitude.toFixed(6);
         },
-        error => {
-            alert("Gagal mengambil lokasi. Pastikan izin lokasi diaktifkan.");
+        () => {
+            alert("Izinkan GPS terlebih dahulu!");
         },
-        {
-            enableHighAccuracy: true,
-            timeout: 10000
-        }
+        { enableHighAccuracy: true }
     );
 }
 
-function kirim() {
+function prosesPesanan() {
 
     if (!latitude || !longitude) {
         alert("Ambil lokasi GPS terlebih dahulu!");
@@ -58,42 +54,49 @@ function kirim() {
     let ongkir = 5000;
     let total = subtotal + ongkir;
 
-    // Tampilkan Invoice
-    document.getElementById("invoice").classList.remove("hidden");
-    document.getElementById("inv-produk").innerText = "Produk: " + produk;
-    document.getElementById("inv-harga").innerText = "Harga Satuan: Rp" + harga;
-    document.getElementById("inv-jumlah").innerText = "Jumlah: " + jumlah;
-    document.getElementById("inv-ongkir").innerText = "Ongkir: Rp" + ongkir;
-    document.getElementById("inv-total").innerText = "Total: Rp" + total;
-
     let mapsURL = `https://www.google.com/maps?q=${latitude},${longitude}`;
-    document.getElementById("mapsLink").href = mapsURL;
 
-    // Simpan ke localStorage
-    let pesanan = {
-        nama,
-        produk,
-        harga,
-        jumlah,
-        ongkir,
-        total,
-        lokasi: mapsURL,
-        waktu: new Date().toLocaleString()
-    };
+    // =========================
+    // KLIK PERTAMA → TAMPIL INVOICE
+    // =========================
+    if (!sudahInvoice) {
 
-    let data = JSON.parse(localStorage.getItem("pesanan")) || [];
-    data.push(pesanan);
-    localStorage.setItem("pesanan", JSON.stringify(data));
+        document.getElementById("invoice").classList.remove("hidden");
+        document.getElementById("inv-produk").innerText = "Produk: " + produk;
+        document.getElementById("inv-harga").innerText = "Harga Satuan: Rp" + harga;
+        document.getElementById("inv-jumlah").innerText = "Jumlah: " + jumlah;
+        document.getElementById("inv-ongkir").innerText = "Ongkir: Rp" + ongkir;
+        document.getElementById("inv-total").innerText = "Total: Rp" + total;
+        document.getElementById("mapsLink").href = mapsURL;
 
-    // Kirim ke WhatsApp
-    let waPenjual = "6281234567890"; // GANTI nomor penjual
+        // simpan ke variabel global
+        totalGlobal = total;
+        mapsURLGlobal = mapsURL;
+        namaGlobal = nama;
+        produkGlobal = produk;
+        jumlahGlobal = jumlah;
+
+        sudahInvoice = true;
+
+        // ubah tulisan tombol
+        document.getElementById("btnBeli").innerText = "Konfirmasi & Kirim ke WA";
+
+        return;
+    }
+
+    // =========================
+    // KLIK KEDUA → KIRIM WA
+    // =========================
+
+    let waPenjual = "6281234567890";
+
     let pesan =
         "INVOICE PESANAN 🍧%0A" +
-        "Nama: " + nama + "%0A" +
-        "Produk: " + produk + "%0A" +
-        "Jumlah: " + jumlah + "%0A" +
-        "Total: Rp" + total + "%0A" +
-        "Lokasi: " + mapsURL;
+        "Nama: " + namaGlobal + "%0A" +
+        "Produk: " + produkGlobal + "%0A" +
+        "Jumlah: " + jumlahGlobal + "%0A" +
+        "Total: Rp" + totalGlobal + "%0A" +
+        "Lokasi: " + mapsURLGlobal;
 
     window.open("https://wa.me/" + waPenjual + "?text=" + pesan);
 }
