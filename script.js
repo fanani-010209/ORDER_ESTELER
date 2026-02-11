@@ -1,6 +1,6 @@
 let latitude = null;
 let longitude = null;
-let sudahInvoice = false; // untuk cek klik pertama atau kedua
+
 let totalGlobal = 0;
 let mapsURLGlobal = "";
 let namaGlobal = "";
@@ -30,7 +30,7 @@ function ambilLokasi() {
     );
 }
 
-function prosesPesanan() {
+function tampilkanInvoice() {
 
     if (!latitude || !longitude) {
         alert("Ambil lokasi GPS terlebih dahulu!");
@@ -56,39 +56,25 @@ function prosesPesanan() {
 
     let mapsURL = `https://www.google.com/maps?q=${latitude},${longitude}`;
 
-    // =========================
-    // KLIK PERTAMA → TAMPIL INVOICE
-    // =========================
-    if (!sudahInvoice) {
+    document.getElementById("invoice").classList.remove("hidden");
+    document.getElementById("inv-produk").innerText = "Produk: " + produk;
+    document.getElementById("inv-harga").innerText = "Harga Satuan: Rp" + harga;
+    document.getElementById("inv-jumlah").innerText = "Jumlah: " + jumlah;
+    document.getElementById("inv-ongkir").innerText = "Ongkir: Rp" + ongkir;
+    document.getElementById("inv-total").innerText = "Total: Rp" + total;
+    document.getElementById("mapsLink").href = mapsURL;
 
-        document.getElementById("invoice").classList.remove("hidden");
-        document.getElementById("inv-produk").innerText = "Produk: " + produk;
-        document.getElementById("inv-harga").innerText = "Harga Satuan: Rp" + harga;
-        document.getElementById("inv-jumlah").innerText = "Jumlah: " + jumlah;
-        document.getElementById("inv-ongkir").innerText = "Ongkir: Rp" + ongkir;
-        document.getElementById("inv-total").innerText = "Total: Rp" + total;
-        document.getElementById("mapsLink").href = mapsURL;
+    // simpan untuk dikirim ke WA nanti
+    totalGlobal = total;
+    mapsURLGlobal = mapsURL;
+    namaGlobal = nama;
+    produkGlobal = produk;
+    jumlahGlobal = jumlah;
+}
 
-        // simpan ke variabel global
-        totalGlobal = total;
-        mapsURLGlobal = mapsURL;
-        namaGlobal = nama;
-        produkGlobal = produk;
-        jumlahGlobal = jumlah;
+function kirimWA() {
 
-        sudahInvoice = true;
-
-        // ubah tulisan tombol
-        document.getElementById("btnBeli").innerText = "Konfirmasi & Kirim ke WA";
-
-        return;
-    }
-
-    // =========================
-    // KLIK KEDUA → KIRIM WA
-    // =========================
-
-    let waPenjual = "6281234567890";
+    let waPenjual = "6281234567890"; // ganti nomor penjual
 
     let pesan =
         "INVOICE PESANAN 🍧%0A" +
