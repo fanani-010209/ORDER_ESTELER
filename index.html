@@ -2,32 +2,42 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <title>Es Teler Shop</title>
+    <title>Ord Teler</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<h1>🍧 Es Teler Segar</h1>
+<h1>🍧 Ord Teler</h1>
+<p>Pilih Es Teler Favoritmu</p>
 
-<img src="https://www.frisianflag.com/storage/app/media/uploaded-files/es-teler-gula-merah.jpg" width="250">
-
-<p><b>Harga: Rp5.000</b></p>
-<p>Isi: Alpukat, kelapa muda, nangka, susu</p>
+<select id="produk">
+    <option value="" disabled selected>-- Pilih Es Teler --</option>
+    <option value="Es Teler Original" data-harga="8000">Es Teler Original - Rp8.000</option>
+    <option value="Es Teler Alpukat" data-harga="10000">Es Teler Alpukat - Rp10.000</option>
+    <option value="Es Teler Durian" data-harga="15000">Es Teler Durian - Rp15.000</option>
+</select>
 
 <button onclick="beli()">Beli Sekarang</button>
 
 <div id="form-pesan" class="hidden">
     <h3>Form Pemesanan</h3>
 
-    <input id="nama" placeholder="Nama">
-    <input id="alamat" placeholder="Alamat">
+    <input id="nama" placeholder="Nama Pemesan">
+    <input id="lokasi" placeholder="Lokasi / Alamat">
+    <input id="jumlah" type="number" placeholder="Jumlah Pesanan">
     <input id="wa" placeholder="No WhatsApp">
 
     <button onclick="kirim()">Kirim Pesanan</button>
 </div>
 
-<br>
-<a href="admin.html">Lihat Pesanan (Admin)</a>
+<div id="invoice" class="hidden">
+    <h2>🧾 Invoice</h2>
+    <p id="inv-produk"></p>
+    <p id="inv-harga"></p>
+    <p id="inv-jumlah"></p>
+    <p id="inv-ongkir"></p>
+    <h3 id="inv-total"></h3>
+</div>
 
 <script src="script.js"></script>
 </body>
