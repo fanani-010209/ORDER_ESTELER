@@ -56,6 +56,7 @@ function tampilkanInvoice() {
 
     let mapsURL = `https://www.google.com/maps?q=${latitude},${longitude}`;
 
+    // Tampilkan invoice saja
     document.getElementById("invoice").classList.remove("hidden");
     document.getElementById("inv-produk").innerText = "Produk: " + produk;
     document.getElementById("inv-harga").innerText = "Harga Satuan: Rp" + harga;
@@ -64,7 +65,7 @@ function tampilkanInvoice() {
     document.getElementById("inv-total").innerText = "Total: Rp" + total;
     document.getElementById("mapsLink").href = mapsURL;
 
-    // simpan untuk dikirim ke WA nanti
+    // Simpan untuk kirim WA nanti
     totalGlobal = total;
     mapsURLGlobal = mapsURL;
     namaGlobal = nama;
