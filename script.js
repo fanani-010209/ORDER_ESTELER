@@ -20,6 +20,7 @@ function ambilLokasi() {
         posisi => {
             latitude = posisi.coords.latitude;
             longitude = posisi.coords.longitude;
+
             document.getElementById("lokasi").value =
                 latitude.toFixed(6) + ", " + longitude.toFixed(6);
         },
@@ -56,7 +57,6 @@ function tampilkanInvoice() {
 
     let mapsURL = `https://www.google.com/maps?q=${latitude},${longitude}`;
 
-    // Tampilkan invoice saja
     document.getElementById("invoice").classList.remove("hidden");
     document.getElementById("inv-produk").innerText = "Produk: " + produk;
     document.getElementById("inv-harga").innerText = "Harga Satuan: Rp" + harga;
@@ -65,7 +65,6 @@ function tampilkanInvoice() {
     document.getElementById("inv-total").innerText = "Total: Rp" + total;
     document.getElementById("mapsLink").href = mapsURL;
 
-    // Simpan untuk kirim WA nanti
     totalGlobal = total;
     mapsURLGlobal = mapsURL;
     namaGlobal = nama;
@@ -75,7 +74,7 @@ function tampilkanInvoice() {
 
 function kirimWA() {
 
-    let waPenjual = "6281234567890"; // ganti nomor penjual
+    let waPenjual = "6281234567890"; // GANTI dengan nomor penjual
 
     let pesan =
         "INVOICE PESANAN 🍧%0A" +
