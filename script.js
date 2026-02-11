@@ -1,23 +1,48 @@
 function beli() {
+    if (document.getElementById("produk").value === "") {
+        alert("Pilih jenis Es Teler terlebih dahulu!");
+        return;
+    }
     document.getElementById("form-pesan").classList.remove("hidden");
 }
 
 function kirim() {
+    let produkSelect = document.getElementById("produk");
+    let produk = produkSelect.value;
+    let harga = produkSelect.options[produkSelect.selectedIndex].dataset.harga;
+
     let nama = document.getElementById("nama").value;
-    let alamat = document.getElementById("alamat").value;
+    let lokasi = document.getElementById("lokasi").value;
+    let jumlah = document.getElementById("jumlah").value;
     let wa = document.getElementById("wa").value;
 
-    if (nama === "" || alamat === "" || wa === "") {
+    if (!nama || !lokasi || !jumlah || !wa) {
         alert("Semua data harus diisi!");
         return;
     }
 
+    let subtotal = harga * jumlah;
+    let ongkir = 5000;
+    let total = subtotal + ongkir;
+
+    // Tampilkan Invoice
+    document.getElementById("invoice").classList.remove("hidden");
+    document.getElementById("inv-produk").innerText = "Produk: " + produk;
+    document.getElementById("inv-harga").innerText = "Harga: Rp" + harga;
+    document.getElementById("inv-jumlah").innerText = "Jumlah: " + jumlah;
+    document.getElementById("inv-ongkir").innerText = "Ongkir: Rp" + ongkir;
+    document.getElementById("inv-total").innerText = "Total: Rp" + total;
+
+    // Simpan ke localStorage
     let pesanan = {
-        nama: nama,
-        alamat: alamat,
-        wa: wa,
-        produk: "Es Teler",
-        harga: 10000,
+        nama,
+        lokasi,
+        wa,
+        produk,
+        harga,
+        jumlah,
+        ongkir,
+        total,
         waktu: new Date().toLocaleString()
     };
 
@@ -25,15 +50,14 @@ function kirim() {
     data.push(pesanan);
     localStorage.setItem("pesanan", JSON.stringify(data));
 
-    let waPenjual = "6281234567890"; // ganti nomor kamu
-
+    // Kirim ke WhatsApp
+    let waPenjual = "6281234567890"; // ganti nomor penjual
     let pesan =
-        "Halo saya pesan Es Teler 🍧%0A" +
+        "INVOICE PESANAN 🍧%0A" +
         "Nama: " + nama + "%0A" +
-        "Alamat: " + alamat + "%0A" +
-        "No WA: " + wa;
+        "Produk: " + produk + "%0A" +
+        "Jumlah: " + jumlah + "%0A" +
+        "Total: Rp" + total;
 
     window.open("https://wa.me/" + waPenjual + "?text=" + pesan);
-
-    alert("Pesanan berhasil!");
 }
