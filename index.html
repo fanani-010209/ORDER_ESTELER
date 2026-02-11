@@ -23,8 +23,11 @@
     <h3>Form Pemesanan</h3>
 
     <input id="nama" placeholder="Nama Pemesan">
-    <input id="lokasi" placeholder="Lokasi / Alamat">
-    <input id="jumlah" type="number" placeholder="Jumlah Pesanan">
+
+    <input id="lokasi" placeholder="Lokasi GPS" readonly>
+    <button onclick="ambilLokasi()">📍 Ambil Lokasi Saya</button>
+
+    <input id="jumlah" type="number" placeholder="Jumlah Pesanan" min="1">
     <input id="wa" placeholder="No WhatsApp">
 
     <button onclick="kirim()">Kirim Pesanan</button>
@@ -37,6 +40,7 @@
     <p id="inv-jumlah"></p>
     <p id="inv-ongkir"></p>
     <h3 id="inv-total"></h3>
+    <a id="mapsLink" target="_blank">📍 Lihat Lokasi di Google Maps</a>
 </div>
 
 <script src="script.js"></script>
