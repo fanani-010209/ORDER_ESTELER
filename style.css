@@ -25,3 +25,17 @@ input {
 .hidden {
     display: none;
 }
+select {
+    padding: 8px;
+    margin: 10px;
+}
+
+#invoice {
+    background: #fff;
+    margin: 20px auto;
+    padding: 15px;
+    width: 300px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
