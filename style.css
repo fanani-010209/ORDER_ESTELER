@@ -4,8 +4,10 @@ body {
     background: #fff6e5;
 }
 
-img {
-    border-radius: 15px;
+select, input {
+    display: block;
+    margin: 8px auto;
+    padding: 8px;
 }
 
 button {
@@ -14,28 +16,18 @@ button {
     padding: 10px 20px;
     border-radius: 10px;
     cursor: pointer;
-}
-
-input {
-    display: block;
-    margin: 8px auto;
-    padding: 7px;
+    margin: 5px;
 }
 
 .hidden {
     display: none;
 }
-select {
-    padding: 8px;
-    margin: 10px;
-}
 
 #invoice {
-    background: #fff;
+    background: #ffffff;
+    width: 300px;
     margin: 20px auto;
     padding: 15px;
-    width: 300px;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
 }
-
