@@ -1,54 +1,55 @@
 <!DOCTYPE html>
-<html lang="id">
+<html>
 <head>
-    <meta charset="UTF-8">
     <title>Ord Teler</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<h1>🍧 Ord Teler</h1>
-<p>Pilih Es Teler Favoritmu</p>
+    <h1>🍧 ORD TELER</h1>
 
-<select id="produk">
-    <option value="" disabled selected>-- Pilih Es Teler --</option>
-    <option value="Es Teler Original" data-harga="8000">Es Teler Original - Rp8.000</option>
-    <option value="Es Teler Alpukat" data-harga="10000">Es Teler Alpukat - Rp10.000</option>
-    <option value="Es Teler Durian" data-harga="15000">Es Teler Durian - Rp15.000</option>
-</select>
-
-<button onclick="beli()">Beli Sekarang</button>
-
-<div id="form-pesan" class="hidden">
-    <h3>Form Pemesanan</h3>
-
-    <input id="nama" placeholder="Nama Pemesan">
-
-    <input id="lokasi" placeholder="Lokasi GPS" readonly>
-    <button onclick="ambilLokasi()">📍 Ambil Lokasi Saya</button>
-
-    <input id="jumlah" type="number" placeholder="Jumlah Pesanan" min="1">
-    <input id="wa" placeholder="No WhatsApp">
-
-    <button onclick="tampilakanInvoice()">Beli sekarang</button>
-</div>
-
-<div id="invoice" class="hidden">
-    <h2>🧾 Invoice</h2>
-    <p id="inv-produk"></p>
-    <p id="inv-harga"></p>
-    <p id="inv-jumlah"></p>
-    <p id="inv-ongkir"></p>
-    <h3 id="inv-total"></h3>
-    <a id="mapsLink" target="_blank">📍 Lihat Lokasi di Google Maps</a>
+    <!-- Pilih Produk -->
+    <select id="produk">
+        <option value="">-- Pilih Es Teler --</option>
+        <option value="Es Teler Original" data-harga="10000">Es Teler Original - Rp10.000</option>
+        <option value="Es Teler Durian" data-harga="15000">Es Teler Durian - Rp15.000</option>
+        <option value="Es Teler Alpukat" data-harga="12000">Es Teler Alpukat - Rp12.000</option>
+    </select>
 
     <br><br>
-    <button onclick="kirimWA()">Beli Sekarang</button>
-</div>
+    <button onclick="beli()">Pesan Sekarang</button>
+
+    <!-- Form Pemesanan -->
+    <div id="form-pesan" class="hidden">
+
+        <h2>Form Pemesanan</h2>
+
+        <input type="text" id="nama" placeholder="Nama Anda">
+        <input type="number" id="jumlah" placeholder="Jumlah Pesanan">
+        <input type="text" id="wa" placeholder="Nomor WhatsApp Anda">
+
+        <input type="text" id="lokasi" placeholder="Lokasi GPS" readonly>
+        <button onclick="ambilLokasi()">📍 Ambil Lokasi Saya</button>
+
+        <br><br>
+        <button onclick="tampilkanInvoice()">Beli Sekarang</button>
+
+    </div>
+
+    <!-- Invoice -->
+    <div id="invoice" class="hidden">
+        <h2>🧾 Invoice</h2>
+        <p id="inv-produk"></p>
+        <p id="inv-harga"></p>
+        <p id="inv-jumlah"></p>
+        <p id="inv-ongkir"></p>
+        <h3 id="inv-total"></h3>
+        <a id="mapsLink" target="_blank">📍 Lihat Lokasi di Google Maps</a>
+
+        <br><br>
+        <button onclick="kirimWA()">Beli Sekarang</button>
+    </div>
 
 <script src="script.js"></script>
 </body>
 </html>
-
-
-
